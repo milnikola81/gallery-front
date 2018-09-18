@@ -34,7 +34,7 @@ export default {
     methods: {
         logout() {
             authService.logout()
-            this.$store.dispatch('modifyState', false)
+            this.$store.dispatch('modifyAuth', false)
             this.$router.push({ name: 'login'});
         }
     },

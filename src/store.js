@@ -8,6 +8,11 @@ export default new Vuex.Store({
   state: {
     isAuthenticated: authService.isAuthenticated()
   },
+  getters: {
+    getAuth(state) {
+      return state.isAuthenticated
+    } 
+  },
   mutations: {
     setAuth(state, auth) {
       state.isAuthenticated = auth

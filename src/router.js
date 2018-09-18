@@ -7,11 +7,12 @@ import CreateGallery from './pages/CreateGallery.vue'
 import MyGalleries from './pages/MyGalleries.vue'
 import SingleGallery from './pages/SingleGallery.vue'
 import Author from './pages/Author.vue'
+import store from './store'
+import { authService } from './services/Auth'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
+const routes = [
     {
       path: '/',
       name: 'galleries',
@@ -20,22 +21,26 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: AppLogin
+      component: AppLogin,
+      meta: { Guest: true }
     },
     {
       path: '/register',
       name: 'register',
-      component: AppRegister
+      component: AppRegister,
+      meta: { Guest: true }
     },
     {
       path: '/create',
       name: 'create',
-      component: CreateGallery
+      component: CreateGallery,
+      meta: { requiresAuth: true }
     },
     {
       path: '/my-galleries',
       name: 'my-galleries',
-      component: MyGalleries
+      component: MyGalleries,
+      meta: { requiresAuth: true }
     },
     {
       path: 'galleries/:id',
@@ -56,4 +61,34 @@ export default new Router({
     //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     // }
   ]
+
+
+const router = new Router({
+  routes,
+  mode: 'history'
 })
+
+var isAuth = store.state.isAuthenticated
+
+router.beforeEach((to, from, next) => {
+  isAuth = store.state.isAuthenticated
+  if (to.meta.requiresAuth) {
+    if (isAuth) {
+      return next();
+    } else {
+      return next({ name: 'galleries' });
+    }
+  }
+  if (to.meta.Guest) {
+    isAuth = store.state.isAuthenticated
+    if (isAuth) {
+      return next({ name: 'galleries' });
+    } else {
+      return next();
+    }
+  }
+  next();
+});
+
+export default router;
+
