@@ -23,7 +23,6 @@
 
 <script>
 import { authService } from '../services/Auth'
-import store from '../store'
 
 
 export default {

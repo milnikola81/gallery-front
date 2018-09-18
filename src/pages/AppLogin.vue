@@ -23,7 +23,6 @@
 
 <script>
 import { authService } from '../services/Auth'
-import store from '../store'
 
 export default {
     data() {
@@ -37,7 +36,7 @@ export default {
         login() {
             authService.login(this.email, this.password)
                 .then((response) => {
-                    this.$store.dispatch('modifyState', true)
+                    this.$store.dispatch('modifyAuth', true)
                     this.$router.push({name:'galleries'})
                 })
                 .catch(error => {

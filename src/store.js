@@ -14,7 +14,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    modifyState(context, payload) {
+    modifyAuth(context, payload) {
       context.commit('setAuth', payload)
     }
   }
