@@ -1,5 +1,7 @@
 <template>
-    <h1>Register</h1>
+    <h3>
+        Register
+    </h3>
 </template>
 
 <script>

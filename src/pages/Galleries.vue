@@ -1,7 +1,7 @@
 <template>
-    <h1>
-        galleries
-    </h1>
+    <h3>
+        Galleries page
+    </h3>
 </template>
 
 <script>

@@ -1,10 +1,68 @@
 <template>
-    <h1>Login</h1>
+    <div id="app_login">
+        <h3>Login</h3>
+
+        <form id="loginForm" @submit.prevent="login">
+            <div class="form-group">
+                <label>Email</label> <br>
+                <input v-model="email" class="form-control" id="email" type="email" placeholder="enter email...">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label> <br>
+                <input v-model="password" class="form-control" id="password" type="password" placeholder="enter password...">
+            </div>
+
+            <p v-if="error" style="color: red">{{error}}</p>
+
+            <button class="btn btn-success" type="submit">Login</button>
+
+        </form>           
+    </div>
 </template>
 
 <script>
+import { authService } from '../services/Auth'
+import store from '../store'
+
 export default {
-    
+    data() {
+        return {
+            email: '',
+            password: '',
+            error: ''
+        }
+    },
+    methods: {
+        login() {
+            authService.login(this.email, this.password)
+                .then((response) => {
+                    this.$store.dispatch('modifyState', true)
+                    this.$router.push({name:'galleries'})
+                })
+                .catch(error => {
+                    this.error = error.response.data.error
+                })
+        }
+    }
 }
 </script>
+
+
+<style scoped>
+#app_login {
+    text-align: center;
+}
+form {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+@media screen and (max-width: 767px) {
+    form {
+        width: 90%;
+    }
+}
+
+</style>
 

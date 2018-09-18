@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { authService } from './services/Auth'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    isAuthenticated: authService.isAuthenticated()
   },
   mutations: {
-
+    setAuth(state, auth) {
+      state.isAuthenticated = auth
+    }
   },
   actions: {
-
+    modifyState(context, payload) {
+      context.commit('setAuth', payload)
+    }
   }
 })

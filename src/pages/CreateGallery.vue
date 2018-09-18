@@ -1,5 +1,7 @@
 <template>
-    <h1>Create</h1>
+    <h3>
+        Create
+    </h3>
 </template>
 
 <script>
