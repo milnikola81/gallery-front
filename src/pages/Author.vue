@@ -43,7 +43,7 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {
-            usersService.getAuthor(vm.$route.params.id)
+            galleriesService.getAuthor(vm.$route.params.id)
                 .then((response) => {
                     vm.galleries = response.data
                     vm.setGalleries(vm.galleries)
@@ -54,7 +54,6 @@ export default {
         setGalleries(vmGalleries) {
             this.galleries = vmGalleries
             this.loadedGalleries = this.galleries.data
-            console.log(this.galleries)
         },
         loadMore() {
             galleriesService.getNextPage(this.galleries.next_page_url, this.searchTerm)
@@ -66,7 +65,7 @@ export default {
                 })
         },
         filterGalleries(searchTerm) {
-            usersService.getAuthor(this.$route.params.id, searchTerm)
+            galleriesService.getAuthor(this.$route.params.id, searchTerm)
                 .then((response) => {
                     this.galleries = response.data
                     this.loadedGalleries = this.galleries.data

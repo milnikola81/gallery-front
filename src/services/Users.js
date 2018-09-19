@@ -11,12 +11,12 @@ export default class UsersService {
         return axios.post('users', user)
     }
 
-    getAuthor(id, searchTerm) {
-        if(!searchTerm) {
-            searchTerm = ''
-        }
-        return axios.get(`authors/${id}?search=${searchTerm}`)
-    }
+    // getAuthor(id, searchTerm) {
+    //     if(!searchTerm) {
+    //         searchTerm = ''
+    //     }
+    //     return axios.get(`authors/${id}?search=${searchTerm}`)
+    // }
 }
 
 export const usersService = new UsersService()

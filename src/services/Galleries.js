@@ -15,6 +15,12 @@ export default class GalleriesService {
     get(id) {
         return axios.get(`galleries/${id}`)
     }
+    getAuthor(id, searchTerm) {
+            if(!searchTerm) {
+                searchTerm = ''
+            }
+            return axios.get(`authors/${id}?search=${searchTerm}`)
+    }
     getNextPage(nextPage, searchTerm) {
         return axios.get(`${nextPage}`)
     }

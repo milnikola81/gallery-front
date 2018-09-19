@@ -33,7 +33,7 @@ export default {
             })
         },
         showAuthor() {
-            usersService.getAuthor(this.gallery.user_id)
+            galleriesService.getAuthor(this.gallery.user_id)
             .then((response) => {
                 this.$router.push({ name: 'author', params: { id: this.gallery.user_id }})
             })
