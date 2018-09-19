@@ -43,12 +43,12 @@ const routes = [
       meta: { requiresAuth: true }
     },
     {
-      path: 'galleries/:id',
+      path: '/galleries/:id',
       name: 'single-gallery',
       component: SingleGallery
     },
     {
-      path: 'authors/:id',
+      path: '/authors/:id',
       name: 'author',
       component: Author
     }

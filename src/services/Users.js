@@ -10,6 +10,10 @@ export default class UsersService {
         // console.log(user)
         return axios.post('users', user)
     }
+
+    getAuthor(id) {
+        return axios.get(`authors/${id}`)
+    }
 }
 
 export const usersService = new UsersService()
