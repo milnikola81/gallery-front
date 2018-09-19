@@ -12,6 +12,9 @@ export default class GalleriesService {
     get(id) {
         return axios.get(`galleries/${id}`)
     }
+    getNextPage(nextPage, searchTerm) {
+        return axios.get(`${nextPage}`)
+    }
 }
 
 export const galleriesService = new GalleriesService()

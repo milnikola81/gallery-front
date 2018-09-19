@@ -8,13 +8,14 @@
             <gallery-header />
             <tbody>
 
-                <gallery-row v-if="galleries" v-for="(gallery, index) in galleries" :key="index" :gallery="gallery" />
+                <gallery-row v-if="loadedGalleries" v-for="(gallery, index) in loadedGalleries" :key="index" :gallery="gallery" />
 
             </tbody>
         </table>
 
-        <p v-if="!galleries.length">There are no galleries to show.</p>
+        <button v-if="galleries.next_page_url" type="button" class="btn btn-success" id="load_more_btn" @click="loadMore">Load more...</button>
 
+        <p v-if="!loadedGalleries.length">There are no galleries to show.</p>
     </div>
 </template>
 
@@ -32,21 +33,40 @@ export default {
     data() {
         return {
             galleries: [],
+            loadedGalleries: []
         }
     },
     beforeRouteEnter (to, from, next) {
-         next(vm => {
+        next(vm => {
             usersService.getAuthor(vm.$route.params.id)
-            .then((response) => {
-                vm.galleries = response.data
-                vm.setGalleries(vm.galleries)
-            })
-         })
+                .then((response) => {
+                    vm.galleries = response.data
+                    vm.setGalleries(vm.galleries)
+                })
+        })
     },
     methods: {
         setGalleries(vmGalleries) {
             this.galleries = vmGalleries
-        }
+            this.loadedGalleries = this.galleries.data
+        },
+        loadMore() {
+            galleriesService.getNextPage(this.galleries.next_page_url, this.searchTerm)
+                .then((response) => {
+                    this.galleries = response.data
+                    for(var i = 0; i < response.data.data.length; i++) {
+                        this.loadedGalleries.push(response.data.data[i])
+                    }
+                })
+        },
     }
 }
 </script>
+
+<style scoped>
+#author_galleries {
+    text-align: center;
+    padding-bottom: 3rem;
+}
+</style>
+
