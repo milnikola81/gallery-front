@@ -22,7 +22,7 @@ export default class GalleriesService {
             return axios.get(`authors/${id}?search=${searchTerm}`)
     }
     getNextPage(nextPage, searchTerm) {
-        return axios.get(`${nextPage}`)
+        return axios.get(`${nextPage}&search=${searchTerm}`)
     }
     addGallery(gallery) {
         return axios.post('galleries', gallery)

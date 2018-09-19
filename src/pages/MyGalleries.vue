@@ -43,7 +43,7 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {
-            usersService.getAuthor(vm.$store.state.userId)
+            galleriesService.getAuthor(vm.$store.state.userId)
             .then((response) => {
                 vm.galleries = response.data
                 vm.setGalleries(vm.galleries)            
@@ -56,7 +56,7 @@ export default {
             this.loadedGalleries = this.galleries.data
         },
         filterGalleries(searchTerm) {
-            usersService.getAuthor(this.$store.state.authId, searchTerm)
+            galleriesService.getAuthor(this.$store.state.userId, searchTerm)
                 .then((response) => {
                     this.galleries = response.data
                     this.loadedGalleries = this.galleries.data
