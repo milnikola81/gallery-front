@@ -35,6 +35,7 @@ export default {
         logout() {
             authService.logout()
             this.$store.dispatch('modifyAuth', false)
+            this.$store.dispatch('modifyId', null)
             this.$router.push({ name: 'login'});
         }
     },

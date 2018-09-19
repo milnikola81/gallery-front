@@ -1,8 +1,10 @@
 <template>
     <div id="author_galleries">
         <br>
-        <h3>authors page</h3>
+        <h3 v-if="loadedGalleries[0]">{{loadedGalleries[0].user.first_name}} {{loadedGalleries[0].user.last_name}}'s galleries</h3>
         <br>
+
+        <gallery-search @searchGallery="filterGalleries"/>
 
         <table class="table">
             <gallery-header />
@@ -24,16 +26,19 @@ import { galleriesService } from '../services/Galleries'
 import { usersService } from '../services/Users'
 import GalleryHeader from '../components/GalleryHeader.vue'
 import GalleryRow from '../components/GalleryRow.vue'
+import GallerySearch from '../components/GallerySearch.vue'
 
 export default {
     components: {
     GalleryRow,
-    GalleryHeader
+    GalleryHeader,
+    GallerySearch
     },
     data() {
         return {
             galleries: [],
-            loadedGalleries: []
+            loadedGalleries: [],
+            searchTerm: ''
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -59,6 +64,15 @@ export default {
                     }
                 })
         },
+        filterGalleries(searchTerm) {
+            usersService.getAuthor(this.$route.params.id, searchTerm)
+                .then((response) => {
+                    console.log(response.data)
+                    this.galleries = response.data
+                    this.loadedGalleries = this.galleries.data
+                    this.searchTerm = searchTerm
+                })
+        }
     }
 }
 </script>

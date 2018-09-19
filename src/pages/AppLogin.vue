@@ -36,7 +36,9 @@ export default {
         login() {
             authService.login(this.email, this.password)
                 .then((response) => {
+                    let userId = authService.getUserId()
                     this.$store.dispatch('modifyAuth', true)
+                    this.$store.dispatch('modifyId', userId)
                     this.$router.push({name:'galleries'})
                 })
                 .catch(error => {

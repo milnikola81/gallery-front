@@ -6,8 +6,11 @@ export default class GalleriesService {
         axios.defaults.baseURL = 'http://localhost:8000/api/'
     }
     
-    getAll() {
-        return axios.get('galleries')
+    getAll(searchTerm) {
+        if(!searchTerm) {
+            searchTerm = ''
+        }
+        return axios.get(`galleries?search=${searchTerm}`)
     }
     get(id) {
         return axios.get(`galleries/${id}`)

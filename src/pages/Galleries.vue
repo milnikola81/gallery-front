@@ -4,6 +4,8 @@
         <h3>Galleries page</h3>
         <br>
 
+        <gallery-search @searchGallery="filterGalleries"/>
+        
         <table class="table">
             <gallery-header />
             <tbody>
@@ -22,16 +24,19 @@
 import { galleriesService } from '../services/Galleries'
 import GalleryHeader from '../components/GalleryHeader.vue'
 import GalleryRow from '../components/GalleryRow.vue'
+import GallerySearch from '../components/GallerySearch.vue'
 
 export default {
     components: {
         GalleryRow,
-        GalleryHeader
+        GalleryHeader,
+        GallerySearch
     },
     data() {
         return {
             galleries: [],
-            loadedGalleries: []
+            loadedGalleries: [],
+            searchTerm: ''
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -55,6 +60,14 @@ export default {
                     for(var i = 0; i < response.data.data.length; i++) {
                         this.loadedGalleries.push(response.data.data[i])
                     }
+                })
+        },
+        filterGalleries(searchTerm) {
+            galleriesService.getAll(searchTerm)
+                .then((response) => {
+                    this.galleries = response.data
+                    this.loadedGalleries = this.galleries.data
+                    this.searchTerm = searchTerm
                 })
         },
     }
