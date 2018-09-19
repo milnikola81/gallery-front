@@ -18,6 +18,9 @@ export default class GalleriesService {
     getNextPage(nextPage, searchTerm) {
         return axios.get(`${nextPage}`)
     }
+    addGallery(gallery) {
+        return axios.post('galleries', gallery)
+    }
 }
 
 export const galleriesService = new GalleriesService()

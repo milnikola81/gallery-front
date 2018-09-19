@@ -13,7 +13,7 @@
             {{gallery.created_at}}
         </td>
         <td>
-            <img v-bind:src=gallery.images[0].image_url height="90" />
+            <img v-if="gallery.images[0]" v-bind:src=gallery.images[0].image_url height="90" />
         </td>
     </tr>
 </template>
