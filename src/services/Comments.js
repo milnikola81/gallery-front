@@ -9,7 +9,9 @@ export default class CommentsService {
     addComment(comment) {
         return axios.post('comments', comment)
     }
-
+    deleteComment(id) {
+        return axios.delete(`comments/${id}`)
+    }
 }
 
 export const commentsService = new CommentsService()

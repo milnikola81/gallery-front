@@ -34,8 +34,8 @@
         
         <comment v-if="gallery.comments"  
             v-for="(comment, index) in gallery.comments" :key="index" 
-            :comment="gallery.comments[index]" />
-         <!-- v-for="(comment, index) in gallery.comments" :key="index" -->
+            :comment="gallery.comments[index]" 
+            @deleteComment="deleteComment"/>
 
         <create-comment v-if="checkAuth" :gallery="gallery" />
 
@@ -44,6 +44,7 @@
 
 <script>
 import { galleriesService } from '../services/Galleries';
+import { commentsService } from '../services/Comments';
 import Comment from '../components/Comment'
 import CreateComment from '../components/CreateComment'
 
@@ -73,6 +74,16 @@ export default {
             .then((response) => {
                 this.$router.push({ name: 'author', params: { id: this.gallery.user_id }})
             })
+        },
+        deleteComment(comment) {
+            let confirmed = confirm('Are you sure that you want to delete this comment?')
+            if(confirmed) {
+                let index = this.gallery.comments.indexOf(comment);
+                commentsService.deleteComment(comment.id)
+                    .then((response) => {
+                    this.gallery.comments.splice(index, 1)
+                })
+            }
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -80,7 +91,6 @@ export default {
             galleriesService.get(vm.$route.params.id)
             .then((response) => {
                 vm.gallery = response.data
-                console.log(response.data)
                 vm.author = vm.gallery.user.first_name+' '+vm.gallery.user.last_name
             })
         })

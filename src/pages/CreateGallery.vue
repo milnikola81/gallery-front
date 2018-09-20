@@ -42,8 +42,6 @@
             <div id="button_row_bottom">
                 <button class="btn btn-success">Submit</button>
                 <router-link :to="{name:'my-galleries'}" tag="button" class="btn btn-danger">Cancel</router-link>
-                <!-- <button class="btn btn-danger">Cancel</button> -->
-                <!-- <input class="btn btn-danger" type="reset" value="Reset" /> -->
             </div>
             <br><br>
         </form>  
@@ -95,6 +93,8 @@ export default {
             }
         },
         removeImage(index) {
+            this.errors = ''
+            this.message = ''
             this.newGallery.images.splice(index, 1)
             this.range--
         },
