@@ -30,6 +30,12 @@
 
         </b-carousel>
 
+        <button v-if="gallery.user_id==this.$store.state.userId" type="button" 
+            class="btn btn-danger"
+            id="delete_galler_btn"
+            @click="deleteGallery()">Delete gallery
+        </button>
+
         <h5 id="comments_headline"><em>Comments <span v-if="gallery.comments">({{gallery.comments.length}})</span></em></h5>
         
         <comment v-if="gallery.comments"  
@@ -82,6 +88,15 @@ export default {
                 commentsService.deleteComment(comment.id)
                     .then((response) => {
                     this.gallery.comments.splice(index, 1)
+                })
+            }
+        },
+        deleteGallery() {
+            let confirmed = confirm('Are you sure that you want to delete this gallery?')
+            if(confirmed) {
+                galleriesService.deleteGallery(this.gallery.id)
+                    .then((response) => {
+                    this.$router.push({ name: 'my-galleries'})
                 })
             }
         }
@@ -174,6 +189,10 @@ export default {
     .description {
         margin-top: 1rem;
     }
+}
+#delete_galler_btn {
+    margin-top: 2rem;
+    text-align: right;
 }
 #comments_headline {
     margin-top: 2rem;

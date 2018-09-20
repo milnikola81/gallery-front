@@ -27,6 +27,9 @@ export default class GalleriesService {
     addGallery(gallery) {
         return axios.post('galleries', gallery)
     }
+    deleteGallery(id) {
+        return axios.delete(`galleries/${id}`)
+    }
 }
 
 export const galleriesService = new GalleriesService()
