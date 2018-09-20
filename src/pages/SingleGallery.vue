@@ -30,13 +30,28 @@
 
         </b-carousel>
 
+        <h5 id="comments_headline"><em>Comments <span v-if="gallery.comments">({{gallery.comments.length}})</span></em></h5>
+        
+        <comment v-if="gallery.comments"  
+            v-for="(comment, index) in gallery.comments" :key="index" 
+            :comment="gallery.comments[index]" />
+         <!-- v-for="(comment, index) in gallery.comments" :key="index" -->
+
+        <create-comment v-if="checkAuth" :gallery="gallery" />
+
     </div>
 </template>
 
 <script>
 import { galleriesService } from '../services/Galleries';
+import Comment from '../components/Comment'
+import CreateComment from '../components/CreateComment'
 
 export default {
+    components: {
+        Comment,
+        CreateComment
+    },
     data () {
         return {
             gallery: {},
@@ -65,6 +80,7 @@ export default {
             galleriesService.get(vm.$route.params.id)
             .then((response) => {
                 vm.gallery = response.data
+                console.log(response.data)
                 vm.author = vm.gallery.user.first_name+' '+vm.gallery.user.last_name
             })
         })
@@ -87,6 +103,42 @@ export default {
 #carousel {
     width: 80%;
     margin: 0 auto;
+    /* border: 0px !important; */
+    /* position: relative; */
+}
+#carousel:active {
+    border: 0px !important;
+    outline: 0px !important;
+}
+.carousel:before, .carousel:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  /* max-width:300px; */
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.carousel:after
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
 }
 @media screen and (max-width: 767px) {
     #carousel {
@@ -112,6 +164,13 @@ export default {
     .description {
         margin-top: 1rem;
     }
+}
+#comments_headline {
+    margin-top: 2rem;
+    text-align: left;
+    color: #999999;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #cccccc;
 }
 
 </style>

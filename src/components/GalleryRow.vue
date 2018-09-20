@@ -49,5 +49,8 @@ export default {
 .title, .author, .created_at {
     text-align: left;
 }
+img {
+    box-shadow: 0 10px 6px -6px #777;
+}
 </style>
 
