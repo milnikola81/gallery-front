@@ -30,11 +30,16 @@
 
         </b-carousel>
 
-        <button v-if="gallery.user_id==this.$store.state.userId" type="button" 
-            class="btn btn-danger"
-            id="delete_galler_btn"
-            @click="deleteGallery()">Delete gallery
-        </button>
+        <div id="button_row">
+            <router-link v-if="gallery.user_id==this.$store.state.userId" :to="{name: 'edit-gallery', params: { id: gallery.id }}" tag="button" class="btn btn-warning">Edit gallery</router-link>
+
+            <button v-if="gallery.user_id==this.$store.state.userId" type="button" 
+                class="btn btn-danger"
+                id="delete_galler_btn"
+                @click="deleteGallery()">Delete gallery
+            </button>
+
+        </div>
 
         <h5 id="comments_headline"><em>Comments <span v-if="gallery.comments">({{gallery.comments.length}})</span></em></h5>
         
@@ -190,12 +195,13 @@ export default {
         margin-top: 1rem;
     }
 }
-#delete_galler_btn {
-    margin-top: 2rem;
-    text-align: right;
+#button_row {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
 }
 #comments_headline {
-    margin-top: 2rem;
+    margin-top: 3rem;
     text-align: left;
     color: #999999;
     padding-bottom: 1rem;

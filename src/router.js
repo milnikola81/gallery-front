@@ -6,6 +6,7 @@ import AppRegister from './pages/AppRegister.vue'
 import CreateGallery from './pages/CreateGallery.vue'
 import MyGalleries from './pages/MyGalleries.vue'
 import SingleGallery from './pages/SingleGallery.vue'
+import EditGallery from './pages/EditGallery.vue'
 import Author from './pages/Author.vue'
 import store from './store'
 import { authService } from './services/Auth'
@@ -51,7 +52,13 @@ const routes = [
       path: '/authors/:id',
       name: 'author',
       component: Author
-    }
+    },
+    {
+      path: '/edit-gallery/:id',
+      name: 'edit-gallery',
+      component: EditGallery,
+      meta: { requiresAuth: true }
+    },
     // {
     //   path: '/about',
     //   name: 'about',
