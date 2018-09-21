@@ -66,8 +66,12 @@ export default {
             usersService.register(this.newUser)
                 .then((response) => {
                     authService.login(this.newUser.email, this.newUser.password)
-                    this.$store.dispatch('modifyAuth', true)             
-                    this.$router.push({name:'galleries'})
+                        .then((response) => {
+                        let userId = authService.getUserId()
+                        this.$store.dispatch('modifyAuth', true)
+                        this.$store.dispatch('modifyId', userId)           
+                        this.$router.push({name:'galleries'})
+                    })
                 })
                 .catch((errors) => {
                     this.errors = errors.response.data.errors
