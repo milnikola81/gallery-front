@@ -13,7 +13,7 @@
             {{gallery.created_at}}
         </td>
         <td>
-            <img v-if="gallery.images[0]" v-bind:src=gallery.images[0].image_url height="90" />
+            <img v-if="gallery.images[0]" v-bind:src=gallery.images[0].image_url />
         </td>
     </tr>
 </template>
@@ -54,7 +54,16 @@ export default {
     text-align: left;
 }
 img {
+    height: 90px;
     box-shadow: 0 10px 6px -6px #777;
+}
+@media screen and (max-width: 767px) {
+    img {
+        height: 60px;
+    }
+    td {
+        font-size: 0.7rem;
+    }
 }
 </style>
 

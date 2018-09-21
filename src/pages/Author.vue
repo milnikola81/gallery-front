@@ -6,7 +6,7 @@
 
         <gallery-search @searchGallery="filterGalleries"/>
 
-        <table class="table">
+        <table class="table galleries_table">
             <gallery-header />
             <tbody>
 

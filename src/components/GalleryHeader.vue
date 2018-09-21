@@ -19,3 +19,12 @@
         </tr>
     </thead>
 </template>
+
+<style scoped>
+@media screen and (max-width: 767px) {
+    th {
+        font-size: 0.7rem;
+    }
+}
+</style>
+

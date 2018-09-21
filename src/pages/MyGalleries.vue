@@ -6,7 +6,7 @@
 
         <gallery-search @searchGallery="filterGalleries"/>
 
-        <table class="table">
+        <table class="table galleries_table">
             <gallery-header />
             <tbody>
                 <gallery-row v-if="loadedGalleries" v-for="(gallery, index) in loadedGalleries" :key="index" :gallery="gallery" />

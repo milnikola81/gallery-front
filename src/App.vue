@@ -32,9 +32,21 @@ export default {
     text-align: center;
     padding-bottom: 3rem;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .app_content {
         max-width: 90%;
+    }
+}
+.galleries_table {
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+@media screen and (max-width: 768px) {
+    galleries_table {	
+		    font-size: 0.7rem;
+        margin: 0 auto;
+        margin-top: 1rem;
     }
 }
 

@@ -6,7 +6,7 @@
 
         <gallery-search @searchGallery="filterGalleries"/>
         
-        <table class="table">
+        <table class="table galleries_table">
             <gallery-header />
             <tbody>
 
@@ -75,17 +75,18 @@ export default {
 </script>
 
 <style>
-table {
+/* table {
     max-width: 90%;
     margin: 0 auto;
     margin-top: 3rem;
 }
 @media screen and (max-width: 767px) {
-    table {		
+    table {	
+        max-width: 100%;	
 		font-size: 0.8rem;
         margin-top: 1rem;
     }
-}
+} */
 </style>
 
 
