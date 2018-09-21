@@ -1,5 +1,5 @@
 <template>
-    <div id="author_galleries">
+    <div class="app_content" id="author_galleries">
         <br>
         <h3 v-if="loadedGalleries[0]">{{loadedGalleries[0].user.first_name}} {{loadedGalleries[0].user.last_name}}'s galleries</h3>
         <br>
@@ -77,9 +77,6 @@ export default {
 </script>
 
 <style scoped>
-#author_galleries {
-    text-align: center;
-    padding-bottom: 3rem;
-}
+
 </style>
 

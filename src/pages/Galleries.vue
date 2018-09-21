@@ -1,5 +1,5 @@
 <template>
-    <div id="galleries">
+    <div class="app_content" id="galleries">
         <br>
         <h3>Galleries page</h3>
         <br>
@@ -75,10 +75,6 @@ export default {
 </script>
 
 <style>
-#galleries {
-    text-align: center;
-    padding-bottom: 3rem;
-}
 table {
     max-width: 90%;
     margin: 0 auto;

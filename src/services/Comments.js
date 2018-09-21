@@ -10,6 +10,7 @@ export default class CommentsService {
         return axios.post('comments', comment)
     }
     deleteComment(id) {
+        console.log(id)
         return axios.delete(`comments/${id}`)
     }
 }

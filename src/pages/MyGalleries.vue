@@ -1,5 +1,5 @@
 <template>
-    <div id="my_galleries">
+    <div class="app_content" id="my_galleries">
         <br>
         <h3>My galleries</h3>
         <br>
@@ -78,8 +78,6 @@ export default {
 
 
 <style scoped>
-#my_galleries {
-    text-align: center;
-    padding-bottom: 3rem;
-}
+
+
 </style>

@@ -26,5 +26,16 @@ export default {
 .add_padding_top {
   padding-top: 1rem;
 }
+.app_content {
+    max-width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 3rem;
+}
+@media screen and (max-width: 767px) {
+    .app_content {
+        max-width: 90%;
+    }
+}
 
 </style>

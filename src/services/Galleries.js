@@ -30,6 +30,10 @@ export default class GalleriesService {
     deleteGallery(id) {
         return axios.delete(`galleries/${id}`)
     }
+    editGallery(gallery) {
+        console.log(gallery)
+        return axios.put(`galleries/${gallery.id}`, gallery)
+    }
 }
 
 export const galleriesService = new GalleriesService()

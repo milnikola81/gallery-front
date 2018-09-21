@@ -23,12 +23,13 @@
             <div v-for="(n, index) in range" :key="index" class="input-group image_input">
                 <input v-model="newGallery.images[index]" class="form-control" id="image_input" type="text" placeholder="enter image url..." aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
+                    <b-img fluid v-if="newGallery.images[index]" :src=newGallery.images[index] alt="Thumbnail" class="thumbnail_image" />
                     <button class="btn btn-warning" type="button" v-if="range > 1" @click="moveUp(index)"><i class="fas fa-arrow-up"></i></button>
                     <button class="btn btn-secondary" type="button" v-if="range > 1" @click="moveDown(index)"><i class="fas fa-arrow-down"></i></button>
                     <button class="btn btn-danger" type="button" v-if="range > 1" @click="removeImage(index)"><i class="fas fa-trash-alt"></i></button>
                 </div>
                 <p v-if="errors.images" style="color:red" class="image_error">{{errors.images[0]}}</p>
-                <p v-if="message" style="color:red" class="image_error">{{message}}</p>
+                <p v-if="message[`${index}`]" style="color:red" class="image_error">{{message[index]}}</p>
                 <p v-if="errors[`images.${index}`]" style="color:red" class="image_error">Please enter a valid URL</p>
             </div>
 
@@ -67,12 +68,12 @@ export default {
             imageArray: [],
             range: 1,
             errors: [],
-            message: ''
+            message: []
         }
     },
     methods: {
         addGallery() {
-            this.message = ''
+            this.message = []
             galleriesService.addGallery(this.newGallery)
                 .then((response) => {
                     this.$router.push({name:'galleries'})
@@ -84,26 +85,32 @@ export default {
         },
         addAnother() {
             this.errors = []
-            if(this.newGallery.images[this.range-1]) {
-                this.range += 1
-                this.message = ''
+            this.message = []
+            for(var i = 0; i<this.range; i++) {
+                if(!this.newGallery.images[i]) {
+                    this.message[i] = "Please fill out this empty field"
+                }
             }
-            else {
-                this.message = "Please fill out the field above first"
+            if(!this.message.length) {
+                this.range += 1
             }
         },
         removeImage(index) {
-            this.errors = ''
-            this.message = ''
+            this.errors = []
+            this.message = []
             this.newGallery.images.splice(index, 1)
             this.range--
         },
         moveUp(index) {
+            this.errors = []
+            this.message = []
             if(index > 0) {
                 this.newGallery.images = arrayMove(this.newGallery.images, index, index-1);
             }
         },
         moveDown(index) {
+            this.errors = []
+            this.message = []
             if(index < this.newGallery.images.length) {
                 this.newGallery.images = arrayMove(this.newGallery.images, index, index+1);
             }
@@ -153,6 +160,10 @@ form {
 }
 .image_input {
     margin-top: 2rem;
+}
+.thumbnail_image {
+    width: 50px;
+    height: 38px;
 }
 </style>
 

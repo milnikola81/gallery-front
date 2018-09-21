@@ -3,13 +3,13 @@
         <td @click="showGallery" class="title">
             {{gallery.title}}
         </td>
-        <td class="d-none d-sm-table-cell description">
-            {{gallery.description}}
+        <td class="d-none d-md-table-cell description">
+            <span id="description">{{gallery.description}}</span>
         </td>
         <td @click="showAuthor" class="author">
             {{gallery.user.first_name+' '+gallery.user.last_name}}
         </td>
-        <td class="d-none d-sm-table-cell created_at">
+        <td class="d-none d-md-table-cell created_at">
             {{gallery.created_at}}
         </td>
         <td>
@@ -43,8 +43,12 @@ export default {
 </script>
 
 <style scoped>
-.description {
+#description {
     text-align: justify;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 .title, .author, .created_at {
     text-align: left;

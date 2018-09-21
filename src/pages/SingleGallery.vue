@@ -1,5 +1,5 @@
 <template>
-    <div id="single_gallery">
+    <div class="app_content" id="single_gallery">
         <br>
         <h3>{{gallery.title}}</h3>
         <br>
@@ -24,7 +24,7 @@
                 @sliding-end="onSlideEnd"
         >
             <a v-for="(image, index) in gallery.images" :key="index" :href="image.image_url">
-                <b-carousel-slide  :img-src="image.image_url">
+                <b-carousel-slide :style="{ maxWidth: '640px', maxHeight: '480px' }" :img-src="image.image_url">
                 </b-carousel-slide>
             </a>
 
@@ -119,22 +119,11 @@ export default {
 </script>
 
 <style scoped>
-#single_gallery {
-    text-align: center;
-    padding-bottom: 3rem;
-    width: 80%;
-    margin: 0 auto;
-}
-@media screen and (max-width: 767px) {
-    #single_gallery {
-        width: 90%;
-    }
-}
 #carousel {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
-    /* border: 0px !important; */
-    /* position: relative; */
+    max-width: 640px;
+    max-height: 480px;
 }
 #carousel:active {
     border: 0px !important;
@@ -169,11 +158,6 @@ export default {
   transform: rotate(3deg);
   right: 10px;
   left: auto;
-}
-@media screen and (max-width: 767px) {
-    #carousel {
-        width: 100%;
-    }
 }
 #gallery_info {
     width: 100%;
