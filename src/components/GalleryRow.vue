@@ -59,7 +59,7 @@ img {
 }
 @media screen and (max-width: 767px) {
     img {
-        height: 60px;
+        height: 70px;
     }
     td {
         font-size: 0.7rem;

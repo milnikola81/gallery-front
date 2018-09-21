@@ -1,5 +1,5 @@
 <template>
-    <div id="create_gallery">
+    <div class="app_content" id="create_gallery">
         <br>
         <h3>Create gallery</h3>
         <br>
@@ -17,8 +17,6 @@
             </div>
 
             <p class="text-left">Add Images:</p> <br>
-
-
 
             <div v-for="(n, index) in range" :key="index" class="input-group image_input">
                 <input v-model="newGallery.images[index]" class="form-control" id="image_input" type="text" placeholder="enter image url..." aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -73,15 +71,22 @@ export default {
     },
     methods: {
         addGallery() {
+            this.errors = []
             this.message = []
-            galleriesService.addGallery(this.newGallery)
+            for(var i = 0; i<this.newGallery.images.length; i++) {
+                if(!this.newGallery.images[i]) {
+                    this.message[i] = "Please fill out this empty field"
+                }
+            }
+            if(this.message.length === 0) {
+                galleriesService.addGallery(this.newGallery)
                 .then((response) => {
                     this.$router.push({name:'galleries'})
                     })
                 .catch((errors) => {
                     this.errors = errors.response.data.errors
                 })
-
+            }
         },
         addAnother() {
             this.errors = []
@@ -121,29 +126,11 @@ export default {
 
 
 <style scoped>
-#create_gallery {
-    text-align: center;
-}
-form {
-    width: 70%;
-    margin: 0 auto;
-}
-@media screen and (max-width: 767px) {
-    form {
-        width: 90%;
-    }
-}
-#image_input {
-    /* display: inline-block; */
-    /* display: flex;
-    flex-direction: column; */
-}
 .image_error {
     position: absolute;
     width: 100%;
     margin-top: 36px;
     line-height: 24px;
-    /* margin: 0 auto; */
 }
 #button_row {
     display: flex;

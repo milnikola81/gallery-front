@@ -68,7 +68,6 @@ export default {
             range: 0,
             errors: [],
             message: [],
-            warning: ''
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -85,25 +84,22 @@ export default {
     },
     methods: {
         editGallery() {
-            for(var i = 0; i<this.images.length; i++) {
-                if(!this.images[i]) {
-                    this.warning = 'Gallery must have at least one image.'
-                }
-                else {
-                    this.errors = []
-                    this.message = []
-                    this.warning = ''
-                    this.gallery.images = this.images
-                    galleriesService.editGallery(this.gallery)
-                        .then((response) => {
-                            this.$router.push({name:'my-galleries'})
-                            })
-                        .catch((errors) => {
-                            this.errors = errors.response.data.errors
-                        })
+            this.gallery.images = this.images
+            this.message = []
+            for(var i = 0; i<this.gallery.images.length; i++) {
+                if(!this.gallery.images[i]) {
+                    this.message[i] = "Please fill out this empty field"
                 }
             }
-
+            if(this.message.length === 0) {
+                galleriesService.editGallery(this.gallery)
+                .then((response) => {
+                    this.$router.push({name:'my-galleries'})
+                    })
+                .catch((errors) => {
+                    this.errors = errors.response.data.errors
+                })
+            }
         },
         addAnother() {
             this.errors = []

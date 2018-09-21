@@ -23,7 +23,7 @@
                 @sliding-start="onSlideStart"
                 @sliding-end="onSlideEnd"
         >
-            <a v-for="(image, index) in gallery.images" :key="index" :href="image.image_url">
+            <a v-for="(image, index) in gallery.images" :key="index" :href="image.image_url" target="_blank">
                 <b-carousel-slide :style="{ maxWidth: '640px', maxHeight: '480px' }" :img-src="image.image_url">
                 </b-carousel-slide>
             </a>

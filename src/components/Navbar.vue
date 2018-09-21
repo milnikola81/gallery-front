@@ -1,7 +1,10 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light navbar-fixed-side navbar-fixed-side-left"  role="navigation" id="menu_top" style="background-color: #ecf1f4;">
             
-        <a class="navbar-brand" href="/">Galleries</a>
+        <div class="col-xs-3 navbar-brand">
+            <img src="../assets/logo.png" id="logo_top" height="30px">
+            <a href="/" class="ml-2">Galleries</a>
+        </div>
 
         <button  id="nav-toggle-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
