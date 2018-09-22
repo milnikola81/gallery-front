@@ -4,7 +4,7 @@
             <form id="addCommentForm" @submit.prevent="addComment">
 
                 <div class="form-group">
-                    <textarea v-model="newComment.content" class="form-control" id="content" rows="5" placeholder="enter comment..."></textarea>
+                    <textarea v-model="newComment.content" class="form-control" id="content" rows="5" placeholder="enter comment..." required></textarea>
                 </div>
                 <p v-if="errors.content" style="color:red" class="text-center">{{errors.content[0]}}</p>
 

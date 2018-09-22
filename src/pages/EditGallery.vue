@@ -9,7 +9,7 @@
         <form v-else id="editGalleryForm" ref="form" @submit.prevent="editGallery">
             <div class="form-group">
                 <label>Title</label> <br>
-                <input v-model="gallery.title" class="form-control" id="title" type="text" placeholder="enter title...">
+                <input v-model="gallery.title" class="form-control" id="title" type="text" placeholder="enter title..." required>
                 <p v-if="errors.title" style="color:red">{{errors.title[0]}}</p>
             </div>
 
@@ -21,8 +21,8 @@
             <p class="text-left">Images:</p>
 
             <div v-for="(n, index) in range" :key="index" class="input-group image_input">
-                <input v-if="index < (gallery.images.length)" v-model="images[index]" class="form-control" type="text">
-                <input v-else v-model="images[index]" class="form-control" type="text">
+                <input v-if="index < (gallery.images.length)" v-model="images[index]" class="form-control" type="url">
+                <input v-else v-model="images[index]" class="form-control" type="url">
                 <div v-if="images.length > 1" class="input-group-append">
                     <b-img fluid v-if="images[index]" :src=images[index] alt="Thumbnail" class="thumbnail_image" />
                     <button class="btn btn-warning" type="button" @click="moveUp(index)"><i class="fas fa-arrow-up"></i></button>
@@ -73,13 +73,13 @@ export default {
     beforeRouteEnter (to, from, next) {
         next(vm => {
             galleriesService.get(vm.$route.params.id)
-            .then((response) => {
-                vm.gallery = response.data
-                vm.range = response.data.images.length
-                for (var i=0; i<vm.gallery.images.length; i++) {
-                    vm.images.push(vm.gallery.images[i].image_url)
-                }
-            })
+                .then((response) => {
+                    vm.gallery = response.data
+                    vm.range = response.data.images.length
+                    for (var i=0; i<vm.gallery.images.length; i++) {
+                        vm.images.push(vm.gallery.images[i].image_url)
+                    }
+                })
         })
     },
     methods: {
@@ -93,12 +93,12 @@ export default {
             }
             if(this.message.length === 0) {
                 galleriesService.editGallery(this.gallery)
-                .then((response) => {
-                    this.$router.push({name:'my-galleries'})
+                    .then((response) => {
+                        this.$router.push({name:'my-galleries'})
+                        })
+                    .catch((errors) => {
+                        this.errors = errors.response.data.errors
                     })
-                .catch((errors) => {
-                    this.errors = errors.response.data.errors
-                })
             }
         },
         addAnother() {

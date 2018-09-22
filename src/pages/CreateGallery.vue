@@ -7,7 +7,7 @@
         <form id="addGalleryForm" ref="form" @submit.prevent="addGallery">
             <div class="form-group">
                 <label>Title</label> <br>
-                <input v-model="newGallery.title" class="form-control" id="title" type="text" placeholder="enter title...">
+                <input v-model="newGallery.title" class="form-control" id="title" type="text" placeholder="enter title..." required>
                 <p v-if="errors.title" style="color:red">{{errors.title[0]}}</p>
             </div>
 
@@ -19,7 +19,7 @@
             <p class="text-left">Add Images:</p> <br>
 
             <div v-for="(n, index) in range" :key="index" class="input-group image_input">
-                <input v-model="newGallery.images[index]" class="form-control" id="image_input" type="text" placeholder="enter image url..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input v-model="newGallery.images[index]" class="form-control" id="image_input" type="url" placeholder="enter image url...">
                 <div class="input-group-append">
                     <b-img fluid v-if="newGallery.images[index]" :src=newGallery.images[index] alt="Thumbnail" class="thumbnail_image" />
                     <button class="btn btn-warning" type="button" v-if="range > 1" @click="moveUp(index)"><i class="fas fa-arrow-up"></i></button>
@@ -62,8 +62,7 @@ export default {
                 images: [],
                 user_id: this.$store.state.userId,
             },
-            // range: 1,
-            imageArray: [],
+            // imageArray: [],
             range: 1,
             errors: [],
             message: []
@@ -80,12 +79,12 @@ export default {
             }
             if(this.message.length === 0) {
                 galleriesService.addGallery(this.newGallery)
-                .then((response) => {
-                    this.$router.push({name:'galleries'})
+                    .then((response) => {
+                        this.$router.push({name:'galleries'})
+                        })
+                    .catch((errors) => {
+                        this.errors = errors.response.data.errors
                     })
-                .catch((errors) => {
-                    this.errors = errors.response.data.errors
-                })
             }
         },
         addAnother() {

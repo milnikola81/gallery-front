@@ -7,16 +7,8 @@ export default class UsersService {
     }
 
     register(user) {
-        // console.log(user)
         return axios.post('users', user)
     }
-
-    // getAuthor(id, searchTerm) {
-    //     if(!searchTerm) {
-    //         searchTerm = ''
-    //     }
-    //     return axios.get(`authors/${id}?search=${searchTerm}`)
-    // }
 }
 
 export const usersService = new UsersService()

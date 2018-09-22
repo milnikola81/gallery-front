@@ -9,7 +9,6 @@ import SingleGallery from './pages/SingleGallery.vue'
 import EditGallery from './pages/EditGallery.vue'
 import Author from './pages/Author.vue'
 import store from './store'
-import { authService } from './services/Auth'
 
 Vue.use(Router)
 
@@ -59,14 +58,6 @@ const routes = [
       component: EditGallery,
       meta: { requiresAuth: true }
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // }
   ]
 
 

@@ -5,15 +5,15 @@
         <form id="loginForm" @submit.prevent="login">
             <div class="form-group">
                 <label>Email</label> <br>
-                <input v-model="email" class="form-control" id="email" type="email" placeholder="enter email...">
+                <input v-model="email" class="form-control" id="email" type="email" placeholder="enter email..." required>
             </div>
 
             <div class="form-group">
                 <label>Password</label> <br>
-                <input v-model="password" class="form-control" id="password" type="password" placeholder="enter password...">
+                <input v-model="password" class="form-control" id="password" type="password" placeholder="enter password..." required>
             </div>
 
-            <p v-if="error" style="color: red">{{error}}</p>
+            <p v-if="error" style="color: red">The username or password you have entered is invalid.</p>
 
             <button class="btn btn-success" type="submit">Login</button>
 

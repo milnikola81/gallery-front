@@ -28,15 +28,15 @@ export default {
     methods: {
         showGallery() {
             galleriesService.get(this.gallery.id)
-            .then((response) => {
-                this.$router.push({ name: 'single-gallery', params: { id: this.gallery.id }})
-            })
+                .then((response) => {
+                    this.$router.push({ name: 'single-gallery', params: { id: this.gallery.id }})
+                })
         },
         showAuthor() {
             galleriesService.getAuthor(this.gallery.user_id)
-            .then((response) => {
-                this.$router.push({ name: 'author', params: { id: this.gallery.user_id }})
-            })
+                .then((response) => {
+                    this.$router.push({ name: 'author', params: { id: this.gallery.user_id }})
+                })
         }
     }
 }
@@ -52,6 +52,9 @@ export default {
 }
 .title, .author, .created_at {
     text-align: left;
+}
+.title:hover, .author:hover {
+    cursor: pointer;
 }
 img {
     height: 90px;

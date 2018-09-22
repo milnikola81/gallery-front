@@ -22,7 +22,6 @@ export default {
 
 <style scoped>
 form {
-    /* padding-right: 1rem; */
     display: flex;
     justify-content: flex-end;
 }

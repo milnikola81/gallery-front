@@ -31,7 +31,6 @@ export default class GalleriesService {
         return axios.delete(`galleries/${id}`)
     }
     editGallery(gallery) {
-        console.log(gallery)
         return axios.put(`galleries/${gallery.id}`, gallery)
     }
 }

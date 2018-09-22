@@ -9,7 +9,6 @@
         <table class="table galleries_table">
             <gallery-header />
             <tbody>
-
                 <gallery-row v-if="loadedGalleries" v-for="(gallery, index) in loadedGalleries" :key="index" :gallery="gallery" />
             </tbody>
         </table>
@@ -42,10 +41,10 @@ export default {
     beforeRouteEnter (to, from, next) {
          next(vm => {
             galleriesService.getAll()
-            .then((response) => {
-                vm.galleries = response.data
-                vm.setGalleries(vm.galleries)
-            })
+                .then((response) => {
+                    vm.galleries = response.data
+                    vm.setGalleries(vm.galleries)
+                })
          })
     },
     methods: {
@@ -75,18 +74,7 @@ export default {
 </script>
 
 <style>
-/* table {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: 3rem;
-}
-@media screen and (max-width: 767px) {
-    table {	
-        max-width: 100%;	
-		font-size: 0.8rem;
-        margin-top: 1rem;
-    }
-} */
+
 </style>
 
 

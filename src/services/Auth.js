@@ -10,18 +10,17 @@ export default class AuthService {
     logout() {
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
-        // delete axios.defaults.headers.common['Authorization']
     }
 
     login(email, password) {
         return axios.post('auth/login', {
         email, password
-        }).then((response) => {
-        // console.log(response.data.access_token)
-        window.localStorage.setItem('token', response.data.access_token)
-        window.localStorage.setItem('userId', response.data.userId)
-        this.setAuthorizationHeader()
         })
+            .then((response) => {
+            window.localStorage.setItem('token', response.data.access_token)
+            window.localStorage.setItem('userId', response.data.userId)
+            this.setAuthorizationHeader()
+            })
     }
 
     setAuthorizationHeader() {

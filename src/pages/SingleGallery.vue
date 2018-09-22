@@ -5,7 +5,7 @@
         <br>
 
         <div id="gallery_info">
-            <p class="d-inline" @click="showAuthor"><em>. . . by {{author}}</em></p>
+            <p class="d-inline" @click="showAuthor" id="author"><em>. . . by {{author}}</em></p>
             <p class="d-inline"><em>. . . created on {{gallery.created_at | moment("MMMM Do YYYY")}}</em></p>
         </div>
 
@@ -82,9 +82,9 @@ export default {
         },
         showAuthor() {
             galleriesService.getAuthor(this.gallery.user_id)
-            .then((response) => {
-                this.$router.push({ name: 'author', params: { id: this.gallery.user_id }})
-            })
+                .then((response) => {
+                    this.$router.push({ name: 'author', params: { id: this.gallery.user_id }})
+                })
         },
         deleteComment(comment) {
             let confirmed = confirm('Are you sure that you want to delete this comment?')
@@ -109,10 +109,10 @@ export default {
     beforeRouteEnter (to, from, next) {
         next(vm => {
             galleriesService.get(vm.$route.params.id)
-            .then((response) => {
-                vm.gallery = response.data
-                vm.author = vm.gallery.user.first_name+' '+vm.gallery.user.last_name
-            })
+                .then((response) => {
+                    vm.gallery = response.data
+                    vm.author = vm.gallery.user.first_name+' '+vm.gallery.user.last_name
+                })
         })
     },
 }
@@ -138,7 +138,6 @@ export default {
   left: 10px;
   width: 50%;
   top: 80%;
-  /* max-width:300px; */
   background: #777;
   -webkit-box-shadow: 0 15px 10px #777;
   -moz-box-shadow: 0 15px 10px #777;
@@ -173,6 +172,9 @@ export default {
     #gallery_info p {
         margin-bottom: 0.3rem;
     }
+}
+#author:hover {
+    cursor: pointer;
 }
 @media screen and (max-width: 767px) {
     .description {
