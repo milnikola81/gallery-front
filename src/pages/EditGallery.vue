@@ -41,8 +41,6 @@
 
             <br><br>
 
-            <p v-if="warning" style="color:red">{{warning}}</p>
-
             <div id="button_row_bottom">
                 <button class="btn btn-success">Done</button>
                 <router-link :to="{name:'my-galleries'}" tag="button" class="btn btn-danger">Cancel</router-link>
